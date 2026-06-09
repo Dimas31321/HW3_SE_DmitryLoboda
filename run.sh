@@ -1,6 +1,6 @@
 #!/bin/bash
 if [ "$1" = "build_generator" ]; then
-    docker build -t data-generator -f DockerFile .
+    docker build -t data-generator -f Dockerfile .
 elif [ "$1" = "run_generator" ]; then
     mkdir -p data
     docker run --rm -v "$(pwd)/data:/data" data-generator
