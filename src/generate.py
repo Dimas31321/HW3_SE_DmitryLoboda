@@ -6,15 +6,15 @@ import sys
 NUM_ROWS = 50
 
 
-COLUMNS = ["COLUMN_1", "COLUMN_2", "COLUMN_3", "COLUMN_4"]
+COLUMNS = ["id", "country", "manufacturer", "item"]
 
 def generate_row():
 
     return {
-        "COLUMN_1": random.randint(0, 100),
-        "COLUMN_2": round(random.uniform(1.5, 9.9), 2),
-        "COLUMN_3": random.randint(0, 100),
-        "COLUMN_4": random.choice(["A", "B", "C"]),
+        "id": random.randint(1, 1000),
+        "country": random.choice(["Russia", "USA", "Italy", "Germany"]),
+        "manufacturer": random.choice(["Company A", "Company B", "Company C", "Company D"]),
+        "item": random.choice(["Car", "T-shirt", "Keyboard"]),
     }
 
 OUTPUT_DIR = sys.argv[1] if len(sys.argv) > 1 else "/data"
