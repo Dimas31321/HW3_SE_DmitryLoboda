@@ -7,9 +7,15 @@ elif [ "$1" = "run_generator" ]; then
 elif [ "$1" = "create_local_data" ]; then
     mkdir -p local_data
     python src/generate.py local_data
+elif [ "$1" = "build_reporter" ]; then
+    docker build -t data-reporter -f Dockerfile.reporter .
+elif [ "$1" = "run_reporter" ]; then
+    docker run --rm -v "$(pwd)/data:/data" data-reporter
+elif [ "$1" = "structure"]; then
+    docker exec -it <имя_контейнера> tree 
+elif [ "$1" = "clear_data" ]; then
+    rm -rf data 
+    rm -rf local_data
 else
-    echo "Usage:"
-    echo "./run.sh build_generator"
-    echo "./run.sh run_generator"
-    echo "./run.sh create_local_data"
+    echo "Wrong command"
 fi
