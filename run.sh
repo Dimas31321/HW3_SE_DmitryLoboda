@@ -25,8 +25,10 @@ elif [ "$1" = "inside_reporter" ]; then
         data-reporter \
         sh -c "find /data -print"
 elif [ "$1" = "report_server" ]; then
-    docker run --rm -p 8080:8080 -v "$(pwd)/data:/data" data-reporter
-    # вроде должно работать 
+    docker run --rm \
+        -p 8080:80 \
+        -v "$(pwd)/data:/usr/share/nginx/html:ro" \
+        nginx
 else
     echo "Wrong command"
 fi

@@ -1,0 +1,10 @@
+# docker-compose.yml
+services:
+  api:
+    build: .
+    image: task-manager:0.1
+    ports:
+      - "5009:5009"
+    environment:
+      PORT: 5009
+    restart: unless-stopped
