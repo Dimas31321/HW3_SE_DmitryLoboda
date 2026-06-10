@@ -11,11 +11,22 @@ elif [ "$1" = "build_reporter" ]; then
     docker build -t data-reporter -f Dockerfile.reporter .
 elif [ "$1" = "run_reporter" ]; then
     docker run --rm -v "$(pwd)/data:/data" data-reporter
-elif [ "$1" = "structure"]; then
-    docker exec -it <имя_контейнера> tree 
+elif [ "$1" = "structure" ]; then
+    docker run --rm data-reporter sh -c "find . -maxdepth 3 -print"
 elif [ "$1" = "clear_data" ]; then
     rm -rf data 
     rm -rf local_data
+elif [ "$1" = "inside_generator" ]; then
+    docker run --rm -v "$(pwd)/data:/data" \
+        data-generator \
+        sh -c "find /data -print"
+elif [ "$1" = "inside_reporter" ]; then 
+    docker run --rm -v "$(pwd)/data:/data" \
+        data-reporter \
+        sh -c "find /data -print"
+elif [ "$1" = "report_server" ]; then
+    docker run --rm -p 8080:8080 -v "$(pwd)/data:/data" data-reporter
+    # вроде должно работать 
 else
     echo "Wrong command"
 fi
